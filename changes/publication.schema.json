@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.atletas-videos/schemas/publication.schema.json",
+  "title": "Registro posterior de publicação",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "publication_id",
+    "change_id",
+    "version",
+    "commit",
+    "tag",
+    "release_url",
+    "status",
+    "tag_immutable",
+    "ci"
+  ],
+  "properties": {
+    "publication_id": {"type": "string", "pattern": "^PUB-[0-9]{4}-[0-9]{3}$"},
+    "change_id": {"type": "string", "pattern": "^CHG-[0-9]{4}-[0-9]{3}$"},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"},
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "tag": {"type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"},
+    "release_url": {"type": "string", "format": "uri", "pattern": "^https://"},
+    "status": {"enum": ["released", "rolled_back"]},
+    "tag_immutable": {"const": true},
+    "ci": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["main", "tag", "failure_category", "run_url"],
+      "properties": {
+        "main": {"enum": ["passed", "failed", "not_run"]},
+        "tag": {"enum": ["passed", "failed", "not_run"]},
+        "failure_category": {"type": ["string", "null"]},
+        "run_url": {"type": ["string", "null"], "format": "uri"}
+      }
+    }
+  }
+}

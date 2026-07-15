@@ -1,0 +1,18 @@
+{
+  "change_id": "CHG-2026-002",
+  "observed_at": "2026-07-15T18:00:09-03:00",
+  "source": "GitHub Actions consultado com gh run view",
+  "run_id": 29447510638,
+  "run_url": "https://github.com/Davisermenho/hbstudio/actions/runs/29447510638",
+  "job_id": 87461550292,
+  "event": "push",
+  "ref": "v0.4.0",
+  "head_sha": "1ebc9319a3e84a30c6036eff10384586c34c654e",
+  "conclusion": "failure",
+  "failed_step": "Aplicar gates de publicação",
+  "command": "python3 scripts/validate_changelog.py --release",
+  "error": "release bloqueada: commit e tag não registrados",
+  "failure_category": "governance_validator_self_reference",
+  "baseline_functional_integrity_affected": false,
+  "decision": "Preservar a execução vermelha e corrigir o contrato em mudança posterior, sem alterar o commit ou mover a tag v0.4.0."
+}

@@ -1,0 +1,20 @@
+{
+  "change_id": "CHG-2026-002",
+  "version": "0.4.1",
+  "approver": "Davi Sermenho",
+  "approved_at": "2026-07-15T19:06:31-03:00",
+  "scope": "Correção de governança candidata à versão 0.4.1",
+  "declaration": "Eu, Davi Sermenho, aprovo a correção de governança CHG-2026-002, candidata à versão 0.4.1. Confirmei que ela remove a exigência autorreferencial, preserva a imutabilidade de v0.4.0, registra posteriormente sua publicação e valida tags usando o contexto real do Git. Revisei os 12 testes e a evidência de rollback para v0.4.0.",
+  "evidence_reviewed": [
+    "changes/evidence/CHG-2026-002/tag-workflow-failure.json",
+    "changes/evidence/CHG-2026-002/rollback-validation.json",
+    "changes/publications/PUB-2026-001.json",
+    "changes/change.schema.json",
+    "changes/publication.schema.json",
+    "scripts/validate_changelog.py",
+    "tests/test_validate_changelog.py",
+    ".github/workflows/changelog.yml"
+  ],
+  "known_limitation": "A execução histórica da tag v0.4.0 permanece vermelha por pertencer ao commit imutável da baseline.",
+  "decision": "approved"
+}

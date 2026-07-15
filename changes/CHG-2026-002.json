@@ -1,0 +1,130 @@
+{
+  "change_id": "CHG-2026-002",
+  "date": "2026-07-15",
+  "version_from": "0.4.0",
+  "version_to": "0.4.1",
+  "responsible": [
+    "Davi Sermenho",
+    "Codex"
+  ],
+  "components": [
+    "changelog-governance",
+    "validation",
+    "continuous-integration",
+    "release-documentation"
+  ],
+  "reason": "Eliminar a dependência circular que exigia do commit de release o próprio hash e o estado de uma publicação ainda não realizada.",
+  "evidence": [
+    {
+      "type": "file",
+      "reference": "changes/publications/PUB-2026-001.json",
+      "description": "Registro posterior e imutável da publicação da baseline 0.4.0."
+    },
+    {
+      "type": "file",
+      "reference": "changes/evidence/CHG-2026-002/tag-workflow-failure.json",
+      "description": "Evidência preservada da falha de governança no workflow da tag v0.4.0."
+    },
+    {
+      "type": "file",
+      "reference": "tests/test_validate_changelog.py",
+      "description": "Testes dos contextos pré-release, branch, tag e publicação posterior."
+    },
+    {
+      "type": "file",
+      "reference": "changes/evidence/CHG-2026-002/rollback-validation.json",
+      "description": "Validação isolada do retorno da candidata 0.4.1 para a tag estável v0.4.0."
+    },
+    {
+      "type": "approval",
+      "reference": "changes/evidence/CHG-2026-002/release-approval.json",
+      "description": "Aprovação humana formal da correção de governança candidata à versão 0.4.1."
+    }
+  ],
+  "changes": [
+    "Separação entre o registro pré-release CHG e o registro posterior de publicação PUB.",
+    "Remoção da exigência de autorreferência do commit no gate de release.",
+    "Validação da tag do evento contra VERSION e do GITHUB_SHA contra o HEAD do Git.",
+    "Validação dos manifestos SHA-256 durante o gate de release.",
+    "Cobertura automatizada dos cenários de branch, tag e publicação posterior.",
+    "Registro da falha conhecida do workflow imutável da tag v0.4.0."
+  ],
+  "expected_behavior": [
+    "Permitir que um registro pré-release aprovado seja válido sem conter o hash do próprio commit.",
+    "Bloquear tags incompatíveis com VERSION ou com GITHUB_SHA divergente do commit verificado.",
+    "Impedir que uma publicação seja declarada dentro do commit que a antecede.",
+    "Registrar commit, tag, URL e resultado de CI em documento PUB criado posteriormente."
+  ],
+  "known_risks": [
+    "A execução histórica da tag v0.4.0 permanecerá vermelha por pertencer a um commit e uma tag imutáveis.",
+    "A correção somente será demonstrada no GitHub Actions quando uma versão posterior aprovada for publicada."
+  ],
+  "compatibility": {
+    "breaking_changes": [],
+    "migration_required": false,
+    "notes": "A alteração afeta apenas governança, validação e CI; o editor de vídeo e a baseline 0.4.0 não são modificados."
+  },
+  "evaluation": {
+    "quality": {
+      "status": "measured",
+      "before": "4 testes do contrato do changelog",
+      "after": "12/12 testes aprovados, com cobertura de pré-release, branch, tag, SHA, publicação posterior e ausência de autorreferência",
+      "unit": "automated_contract_tests",
+      "evidence": "tests/test_validate_changelog.py"
+    },
+    "security": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Nenhuma dependência ou superfície de execução do editor foi adicionada.",
+      "unit": null,
+      "evidence": null
+    },
+    "latency": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Mudança restrita ao gate de governança e CI.",
+      "unit": null,
+      "evidence": null
+    },
+    "cost": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Sem alteração de APIs, renderização ou consumo operacional do editor.",
+      "unit": null,
+      "evidence": null
+    },
+    "regressions": {
+      "status": "passed",
+      "critical_count": 0,
+      "items": [
+        "12/12 testes automatizados do contrato aprovados."
+      ],
+      "evidence": "tests/test_validate_changelog.py"
+    }
+  },
+  "approval": {
+    "status": "approved",
+    "approved_by": "Davi Sermenho",
+    "approved_at": "2026-07-15T19:06:31-03:00",
+    "evidence": "changes/evidence/CHG-2026-002/release-approval.json"
+  },
+  "rollback": {
+    "target_version": "0.4.0",
+    "procedure": [
+      "Realizar checkout isolado da tag v0.4.0.",
+      "Confirmar commit, tag e VERSION.",
+      "Executar validador, testes históricos e conferência dos hashes.",
+      "Remover o worktree após a validação."
+    ],
+    "validation_status": "passed",
+    "evidence": "changes/evidence/CHG-2026-002/rollback-validation.json"
+  },
+  "version_control": {
+    "commit": null,
+    "tag": "v0.4.1"
+  },
+  "publication": {
+    "status": "not_released",
+    "published_at": null
+  }
+}

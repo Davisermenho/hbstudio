@@ -4,8 +4,11 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import os
 import re
+import subprocess
 import sys
 from datetime import date, datetime
 from pathlib import Path
@@ -14,6 +17,8 @@ from typing import Any
 
 CHANGE_ID_RE = re.compile(r"^CHG-(\d{4})-(\d{3})$")
 SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$")
+PUBLICATION_ID_RE = re.compile(r"^PUB-(\d{4})-(\d{3})$")
+COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
 REQUIRED_FIELDS = {
     "change_id",
     "date",
@@ -165,18 +170,155 @@ def validate_record(record: Any, path: Path, release: bool = False) -> list[str]
     version_control = record["version_control"]
     if not isinstance(version_control, dict):
         errors.append(f"{path}: version_control deve ser um objeto")
-    elif release and (
-        not _non_empty_string(version_control.get("commit"))
-        or not _non_empty_string(version_control.get("tag"))
-    ):
-        errors.append(f"{path}: release bloqueada: commit e tag não registrados")
+    else:
+        if version_control.get("commit") is not None:
+            errors.append(
+                f"{path}: version_control.commit deve ser nulo; "
+                "o commit é registrado após a publicação"
+            )
+        tag = version_control.get("tag")
+        expected_tag = f"v{record['version_to']}"
+        if tag is not None and tag != expected_tag:
+            errors.append(
+                f"{path}: version_control.tag {tag!r} difere da versão esperada {expected_tag!r}"
+            )
 
     publication = record["publication"]
-    if not isinstance(publication, dict) or publication.get("status") not in {
-        "not_released", "released", "rolled_back"
-    }:
+    if not isinstance(publication, dict):
         errors.append(f"{path}: publication inválida")
+    elif publication.get("status") != "not_released" or publication.get("published_at") is not None:
+        errors.append(
+            f"{path}: publicação não pode ser declarada antecipadamente no registro da mudança; "
+            "use um registro PUB posterior"
+        )
 
+    return errors
+
+
+def validate_publication(record: Any, path: Path) -> list[str]:
+    errors: list[str] = []
+    if not isinstance(record, dict):
+        return [f"{path}: a raiz deve ser um objeto JSON"]
+
+    required = {
+        "publication_id", "change_id", "version", "commit", "tag",
+        "release_url", "status", "tag_immutable", "ci",
+    }
+    missing = sorted(required - record.keys())
+    if missing:
+        return [f"{path}: campos obrigatórios ausentes: {', '.join(missing)}"]
+
+    publication_id = record.get("publication_id")
+    if not _non_empty_string(publication_id) or not PUBLICATION_ID_RE.fullmatch(publication_id):
+        errors.append(f"{path}: publication_id inválido")
+    elif path.stem != publication_id:
+        errors.append(f"{path}: nome do arquivo deve ser {publication_id}.json")
+
+    if not _non_empty_string(record.get("change_id")) or not CHANGE_ID_RE.fullmatch(record["change_id"]):
+        errors.append(f"{path}: change_id inválido")
+    if not _non_empty_string(record.get("version")) or not SEMVER_RE.fullmatch(record["version"]):
+        errors.append(f"{path}: version deve seguir SemVer")
+    if not _non_empty_string(record.get("commit")) or not COMMIT_RE.fullmatch(record["commit"]):
+        errors.append(f"{path}: commit deve ser um SHA-1 Git completo")
+    expected_tag = f"v{record.get('version')}"
+    if record.get("tag") != expected_tag:
+        errors.append(f"{path}: tag {record.get('tag')!r} difere da versão esperada {expected_tag!r}")
+    if not _non_empty_string(record.get("release_url")) or not record["release_url"].startswith("https://"):
+        errors.append(f"{path}: release_url deve usar HTTPS")
+    if record.get("status") not in {"released", "rolled_back"}:
+        errors.append(f"{path}: status de publicação inválido")
+    if record.get("tag_immutable") is not True:
+        errors.append(f"{path}: tag_immutable deve ser true")
+
+    ci = record.get("ci")
+    if not isinstance(ci, dict):
+        errors.append(f"{path}: ci deve ser um objeto")
+    else:
+        for field in ("main", "tag"):
+            if ci.get(field) not in {"passed", "failed", "not_run"}:
+                errors.append(f"{path}: ci.{field} inválido")
+        if ci.get("tag") == "failed" and not _non_empty_string(ci.get("failure_category")):
+            errors.append(f"{path}: falha de CI da tag deve possuir categoria")
+        if ci.get("tag") == "failed" and not _non_empty_string(ci.get("run_url")):
+            errors.append(f"{path}: falha de CI da tag deve possuir URL da execução")
+
+    return errors
+
+
+def validate_tag_context(
+    root: Path,
+    ref_name: str | None,
+    github_sha: str | None,
+    head_sha: str | None = None,
+) -> list[str]:
+    errors: list[str] = []
+    version_path = root / "VERSION"
+    try:
+        version = version_path.read_text(encoding="utf-8").strip()
+    except OSError as exc:
+        return [f"{version_path}: não foi possível ler: {exc}"]
+
+    expected_tag = f"v{version}"
+    if ref_name != expected_tag:
+        errors.append(f"tag do evento {ref_name!r} difere da versão esperada {expected_tag!r}")
+
+    if not _non_empty_string(github_sha) or not COMMIT_RE.fullmatch(github_sha):
+        errors.append("GITHUB_SHA deve ser um SHA-1 Git completo")
+        return errors
+
+    if head_sha is None:
+        try:
+            result = subprocess.run(
+                ["git", "rev-parse", "HEAD"],
+                cwd=root,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+        except (OSError, subprocess.CalledProcessError) as exc:
+            errors.append(f"não foi possível resolver o commit da tag: {exc}")
+            return errors
+        head_sha = result.stdout.strip()
+
+    if head_sha != github_sha:
+        errors.append(f"GITHUB_SHA {github_sha!r} difere do commit da tag {head_sha!r}")
+    return errors
+
+
+def validate_baseline_manifests(root: Path) -> list[str]:
+    errors: list[str] = []
+    manifest_paths = sorted((root / "changes" / "baselines").glob("*.sha256"))
+    if not manifest_paths:
+        return [f"{root / 'changes' / 'baselines'}: nenhum manifesto de baseline encontrado"]
+
+    for manifest_path in manifest_paths:
+        try:
+            lines = manifest_path.read_text(encoding="utf-8").splitlines()
+        except OSError as exc:
+            errors.append(f"{manifest_path}: não foi possível ler: {exc}")
+            continue
+        for line_number, line in enumerate(lines, start=1):
+            if not line.strip():
+                continue
+            parts = line.split(maxsplit=1)
+            if len(parts) != 2 or not re.fullmatch(r"[0-9a-f]{64}", parts[0]):
+                errors.append(f"{manifest_path}:{line_number}: entrada SHA-256 inválida")
+                continue
+            expected_hash, relative_path = parts
+            relative_path = relative_path.lstrip("* ")
+            target = (root / relative_path).resolve()
+            try:
+                target.relative_to(root.resolve())
+            except ValueError:
+                errors.append(f"{manifest_path}:{line_number}: caminho fora do repositório")
+                continue
+            try:
+                actual_hash = hashlib.sha256(target.read_bytes()).hexdigest()
+            except OSError as exc:
+                errors.append(f"{manifest_path}:{line_number}: não foi possível ler {relative_path}: {exc}")
+                continue
+            if actual_hash != expected_hash:
+                errors.append(f"{manifest_path}:{line_number}: hash divergente para {relative_path}")
     return errors
 
 
@@ -189,6 +331,7 @@ def validate_repository(root: Path, release: bool = False) -> tuple[list[str], l
         return [f"{changes_dir}: nenhum registro de mudança encontrado"], warnings
 
     records: list[tuple[Path, dict[str, Any]]] = []
+    records_by_id: dict[str, dict[str, Any]] = {}
     identifiers: set[str] = set()
     versions: set[str] = set()
     for path in paths:
@@ -223,6 +366,29 @@ def validate_repository(root: Path, release: bool = False) -> tuple[list[str], l
             identifiers.add(change_id)
             versions.add(version_to)
             records.append((path, record))
+            if _non_empty_string(change_id):
+                records_by_id[change_id] = record
+
+    publication_ids: set[str] = set()
+    publications_dir = changes_dir / "publications"
+    for path in sorted(publications_dir.glob("PUB-*.json")):
+        try:
+            publication = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            errors.append(f"{path}: JSON inválido: {exc}")
+            continue
+        errors.extend(validate_publication(publication, path))
+        if not isinstance(publication, dict):
+            continue
+        publication_id = publication.get("publication_id")
+        if publication_id in publication_ids:
+            errors.append(f"{path}: publication_id duplicado: {publication_id}")
+        publication_ids.add(publication_id)
+        referenced_change = records_by_id.get(publication.get("change_id"))
+        if referenced_change is None:
+            errors.append(f"{path}: mudança referenciada não existe: {publication.get('change_id')}")
+        elif publication.get("version") != referenced_change.get("version_to"):
+            errors.append(f"{path}: versão da publicação difere da mudança referenciada")
 
     if records:
         latest_version = records[-1][1].get("version_to")
@@ -271,9 +437,22 @@ def main() -> int:
         action="store_true",
         help="Aplica os gates obrigatórios para publicação de uma versão.",
     )
+    parser.add_argument(
+        "--tag-context",
+        action="store_true",
+        help="Confere a tag do evento e GITHUB_SHA contra VERSION e o HEAD do Git.",
+    )
     args = parser.parse_args()
 
     errors, warnings = validate_repository(args.root.resolve(), release=args.release)
+    if args.release:
+        errors.extend(validate_baseline_manifests(args.root.resolve()))
+    if args.tag_context:
+        errors.extend(validate_tag_context(
+            args.root.resolve(),
+            os.environ.get("GITHUB_REF_NAME"),
+            os.environ.get("GITHUB_SHA"),
+        ))
     for warning in warnings:
         print(f"[AVISO] {warning}")
     for error in errors:

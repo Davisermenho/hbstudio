@@ -37,16 +37,19 @@ usados somente quando esses componentes participarem da execução do produto.
 7. Obter aprovação técnica e, quando aplicável, validação visual/tática.
 8. Executar `python3 scripts/validate_changelog.py --release`.
 9. Criar commit e tag imutável somente após todos os gates.
-10. Monitorar execuções posteriores e registrar regressões descobertas.
+10. No evento de tag, validar a tag contra `VERSION` e `GITHUB_SHA` contra o
+    commit verificado pelo Git.
+11. Registrar a publicação ocorrida em `changes/publications/PUB-AAAA-NNN.json`.
+12. Monitorar execuções posteriores e registrar regressões descobertas.
 
 ## Estados
 
 - `pending`: informação ou decisão ainda não confirmada.
 - `approved`: mudança aceita pelo responsável identificado.
 - `rejected`: mudança recusada; não pode ser publicada.
-- `not_released`: registro criado, mas versão não publicada.
-- `released`: versão publicada e associada a commit e tag.
-- `rolled_back`: versão retirada por reversão controlada.
+- `not_released`: estado obrigatório do registro `CHG`, criado antes da publicação.
+- `released`: publicação posterior associada a commit e tag em um registro `PUB`.
+- `rolled_back`: publicação retirada por reversão controlada, registrada em `PUB`.
 
 Execução, verificação, aceitação e conclusão são estados diferentes. A criação do
 arquivo ou o sucesso de uma ferramenta não constituem aprovação.
@@ -79,6 +82,13 @@ Gate de publicação:
 python3 scripts/validate_changelog.py --release
 ```
 
-O primeiro comando pode terminar com avisos. O gate de publicação transforma
-aprovações, avaliações, evidências e rollback pendentes em erros bloqueadores.
+Gate executado pelo evento de tag:
 
+```bash
+python3 scripts/validate_changelog.py --release --tag-context
+```
+
+O primeiro comando pode terminar com avisos. O gate de publicação transforma
+aprovações, avaliações, evidências e rollback pendentes em erros bloqueadores. O
+contexto da tag é obtido de `GITHUB_REF_NAME`, `GITHUB_SHA` e do `HEAD`; ele não é
+antecipado no registro da mudança.

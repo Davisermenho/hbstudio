@@ -1,0 +1,49 @@
+{
+  "change_id": "CHG-2026-002",
+  "case_id": "ROLLBACK-0.4.1-TO-0.4.0-001",
+  "validated_at": "2026-07-15T18:51:56-03:00",
+  "target_version": "0.4.0",
+  "target_tag": "v0.4.0",
+  "worktree": "/tmp/hbstudio-rollback-v040",
+  "isolated_checkout": true,
+  "identity": {
+    "expected_commit": "1ebc9319a3e84a30c6036eff10384586c34c654e",
+    "actual_commit": "1ebc9319a3e84a30c6036eff10384586c34c654e",
+    "exact_tag": "v0.4.0",
+    "version_file": "0.4.0",
+    "status": "passed"
+  },
+  "checks": {
+    "changelog_validator": {
+      "command": "/home/davis/atletas-videos/.venv/bin/python scripts/validate_changelog.py",
+      "result": "Changelog válido.",
+      "status": "passed"
+    },
+    "historical_tests": {
+      "command": "/home/davis/atletas-videos/.venv/bin/python -m unittest discover -s tests -v",
+      "passed": 4,
+      "failed": 0,
+      "status": "passed"
+    },
+    "baseline_hashes": {
+      "command": "sha256sum -c changes/baselines/0.4.0.sha256",
+      "passed": 6,
+      "failed": 0,
+      "status": "passed"
+    },
+    "restored_worktree_clean": "passed",
+    "main_worktree_unchanged": "passed",
+    "tag_moved": false
+  },
+  "cleanup": {
+    "worktree_removed": true,
+    "remaining_worktrees": [
+      "/home/davis/atletas-videos"
+    ]
+  },
+  "decision": "passed",
+  "notes": [
+    "O retorno à versão estável foi demonstrado em checkout destacado e isolado.",
+    "Nenhum commit, tag, arquivo da baseline ou alteração funcional do editor foi modificado durante o teste."
+  ]
+}

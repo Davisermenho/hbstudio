@@ -1,0 +1,16 @@
+{
+  "publication_id": "PUB-2026-001",
+  "change_id": "CHG-2026-001",
+  "version": "0.4.0",
+  "commit": "1ebc9319a3e84a30c6036eff10384586c34c654e",
+  "tag": "v0.4.0",
+  "release_url": "https://github.com/Davisermenho/hbstudio/releases/tag/v0.4.0",
+  "status": "released",
+  "tag_immutable": true,
+  "ci": {
+    "main": "passed",
+    "tag": "failed",
+    "failure_category": "governance_validator_self_reference",
+    "run_url": "https://github.com/Davisermenho/hbstudio/actions/runs/29447510638"
+  }
+}
