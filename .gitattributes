@@ -1,0 +1,6 @@
+# Markdown usa dois espaços finais como quebra de linha explícita.
+*.md whitespace=-blank-at-eol,-blank-at-eof
+
+# A baseline importa alguns arquivos com uma linha vazia final preservada.
+*.json whitespace=-blank-at-eof
+VERSION whitespace=-blank-at-eof

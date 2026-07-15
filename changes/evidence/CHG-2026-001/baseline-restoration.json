@@ -1,0 +1,50 @@
+{
+  "change_id": "CHG-2026-001",
+  "restored_at": "2026-07-15T15:03:32-03:00",
+  "target_version": "0.4.0",
+  "decision": "restore_original_baseline",
+  "manifest_updated": false,
+  "rebaseline_performed": false,
+  "post_baseline_state_preserved": {
+    "directory": "/tmp/atletas-videos-pos-baseline",
+    "hash_manifest_sha256": "d5e162a94f1ef5aea7732fab78105a369549b63ac9b7bf0251de84e1df2ecf83",
+    "diffs": [
+      {
+        "reference": "editor-baseline-to-post.diff",
+        "sha256": "8b1a690a2de292b14fe0355bc71611c823bfedc36b2447bbb87ee54c5a5b0eb2"
+      },
+      {
+        "reference": "especificacao-baseline-to-post.diff",
+        "sha256": "998870ee9fab928475d510d1cb6670ef619f95a2908e40e3b905c07b5413dc0f"
+      },
+      {
+        "reference": "config-baseline-to-post.diff",
+        "sha256": "32e6d101817fd9ae4875e89369caac60890284f380bd8c741a6e622d5e73e391"
+      }
+    ]
+  },
+  "restored_files": [
+    {
+      "reference": "scripts/editor/editar_video.py",
+      "sha256": "cefa27cfbd8a9d50fd16729bb909562991da61d43e8dd09c3722bd4ec76607d0",
+      "source": "Reconstrução determinística comprovada na investigação de integridade"
+    },
+    {
+      "reference": "docs/planejamento/projeto/ESPECIFICACAO.md",
+      "sha256": "a6490795235cc9976ea0238752d188bcd59d41ba76ac9961af68d2f92993c9fa",
+      "source": "Cópia preservada no histórico local do VS Code"
+    },
+    {
+      "reference": "config_exemplo.json",
+      "sha256": "dd6b93ac4118cb8792f5350d7e41f68f1c40d309e303af6508e75850719e379a",
+      "source": "Cópia preservada no histórico local do VS Code"
+    }
+  ],
+  "integrity_check": {
+    "command": "sha256sum -c changes/baselines/0.4.0.sha256",
+    "passed_files": 6,
+    "total_files": 6,
+    "status": "passed"
+  },
+  "follow_up": "Reaplicar o estado preservado somente depois da publicação de 0.4.0, em uma mudança independente destinada a 0.4.1."
+}

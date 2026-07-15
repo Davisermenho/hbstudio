@@ -1,0 +1,32 @@
+# Ambientes e caches Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Artefatos locais e temporários
+temporarios/
+logs/*.jsonl
+*.log
+frame_*.png
+
+# Mídia real e resultados renderizados não devem ser versionados
+videos/
+saida/
+entrada/
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# Arquivos locais de ferramentas e sistema
+.DS_Store
+.idea/
+.vscode/
+
+# Transcrição acidental de uma instalação local; preservada, mas não versionada
+/=4.8.0

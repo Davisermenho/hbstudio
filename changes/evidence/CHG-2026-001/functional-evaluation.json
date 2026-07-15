@@ -1,0 +1,107 @@
+{
+  "change_id": "CHG-2026-001",
+  "evaluation_date": "2026-07-15",
+  "scope": "Uma execução funcional local de um clipe, sem publicação e sem serviços externos pagos.",
+  "configuration": {
+    "json_valid": true,
+    "source_video_exists": true,
+    "source_duration_seconds": 5170.108662,
+    "source_streams": [
+      "video:h264:1920x1080:60000/1001fps",
+      "audio:aac"
+    ],
+    "selected_source_window_seconds": 13.0
+  },
+  "baseline_integrity": {
+    "status": "failed",
+    "passed_files_at_evaluation": 4,
+    "total_files": 6,
+    "path_references_updated_without_rebaselining": true,
+    "note": "config_exemplo.json conferia durante EVAL-001, mas foi substituído posteriormente; consultar integrity-investigation.json para o estado atual.",
+    "mismatches": [
+      {
+        "reference": "scripts/editor/editar_video.py",
+        "expected_sha256": "cefa27cfbd8a9d50fd16729bb909562991da61d43e8dd09c3722bd4ec76607d0",
+        "observed_sha256": "b2fc5430b29ad4b0fc1c4f35d76dfb786aea661049547d122f7ae3356c52df5f"
+      },
+      {
+        "reference": "docs/planejamento/projeto/ESPECIFICACAO.md",
+        "expected_sha256": "a6490795235cc9976ea0238752d188bcd59d41ba76ac9961af68d2f92993c9fa",
+        "observed_sha256": "c70e587f511a52a7bfa9e0d5e2a835e56f969533d701a105492303d2f14f8dcc"
+      }
+    ]
+  },
+  "execution": {
+    "documented_python_command_available": false,
+    "interpreter_used": ".venv/bin/python",
+    "entrypoint_used": "scripts/editor/editar_video.py",
+    "case_count": 1,
+    "exit_code": 0,
+    "generated_file_count": 1,
+    "unexpected_log_errors": 0,
+    "elapsed_seconds": 37.63,
+    "user_cpu_seconds": 103.30,
+    "system_cpu_seconds": 12.87,
+    "maximum_resident_set_kib": 702620
+  },
+  "output": {
+    "duration_seconds": 28.0,
+    "expected_duration_seconds": 28.0,
+    "duration_rationale": "13 s do recorte, mais 2 s introduzidos pela janela de 2 s em camera lenta a 0,5x, mais 13 s de replay.",
+    "size_bytes": 19338420,
+    "sha256": "44e0ceac9f8683cf0aff4575e2cefd684d3c2465c7f43d33383880a08fac005d",
+    "streams": [
+      "video:h264:1920x1080:30fps:28s",
+      "audio:aac:28s"
+    ],
+    "full_decode_exit_code": 0,
+    "audio_mean_volume_db": -23.5,
+    "audio_max_volume_db": -6.6
+  },
+  "quality": {
+    "status": "pending",
+    "technical_result": "1/1 caso gerado e decodificado; imagem e audio presentes; duracao coerente com o pipeline; amostras do inicio, meio e fim sem quadros pretos ou corrupcao aparente.",
+    "pending": "Revisao humana integral de imagem, audio, inicio, fim, textos e sincronismo. A amostragem automatizada nao constitui aprovacao audiovisual."
+  },
+  "latency": {
+    "status": "measured",
+    "observed_elapsed_seconds": 37.63,
+    "processing_factor_over_source_window": 2.8946,
+    "processing_factor_over_output_duration": 1.344,
+    "percentiles": null,
+    "note": "Uma execucao nao permite calcular p50 ou p95."
+  },
+  "security": {
+    "status": "measured",
+    "pip_check": "passed",
+    "secret_pattern_file_matches": 0,
+    "paid_api_reference_matches_in_python": 0,
+    "ignored_local_artifacts": [
+      ".venv/",
+      "videos/",
+      "saida/"
+    ],
+    "vulnerability_audit": {
+      "status": "passed",
+      "tool": "pip-audit 2.10.1",
+      "scope": "requirements.txt",
+      "exit_code": 0,
+      "result": "No known vulnerabilities found",
+      "evidence": "changes/evidence/CHG-2026-001/pip-audit.txt",
+      "evidence_sha256": "15950a68a7ed99c59779717acefdceb3f69cfd31bde67d2c954f2a3cea4d7955"
+    }
+  },
+  "cost": {
+    "status": "measured",
+    "direct_paid_api_brl": 0.0,
+    "cpu_time_seconds": 116.17,
+    "maximum_resident_set_kib": 702620,
+    "output_size_bytes": 19338420,
+    "hardware_and_energy_cost": "not_calculated"
+  },
+  "temporary_artifacts": {
+    "location": "/tmp/atletas-videos-eval",
+    "execution_log_sha256": "0ea4282402e4422a1fbb40da68c9beb2c39f14af30aedd2f13680b1309052d6d",
+    "note": "Video, log e quadros de amostragem permanecem fora do repositorio."
+  }
+}

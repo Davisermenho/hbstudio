@@ -1,0 +1,67 @@
+{
+  "video_origem": "videos/ACISEG_35x24_IDEC_2026-07-13/ACISEG_35x24_IDEC_2026-07-13.mp4",
+  "diretorio_saida": "saida",
+  "fps_saida": 30,
+  "clipes": [
+    {
+      "nome": "lance_01_transicao_bebe",
+      "atleta": "Bebê",
+      "tipo": "acerto",
+      "label_abertura": "ACERTO: Transição ofensiva e continuidade",
+      "inicio": "00:07:03.000",
+      "fim": "00:07:23.000",
+      "momento_analise": "00:07:18.000",
+      "tipo_analise": "slow_motion",
+      "velocidade_slow": 0.5,
+      "janela_analise_segundos": 3.0,
+      "duracao_freeze": null,
+      "grafismos": [],
+      "legenda_analise": "Bebê fixa a marcação e gera espaço. Cirilo ataca o corredor em velocidade para finalizar."
+    },
+    {
+      "nome": "lance_02_leitura_goleiro",
+      "atleta": "Clark",
+      "tipo": "ajuste",
+      "label_abertura": "AJUSTE: Leitura do goleiro na finalização",
+      "inicio": "00:08:04.000",
+      "fim": "00:08:27.000",
+      "momento_analise": "00:08:12.000",
+      "tipo_analise": "slow_motion",
+      "velocidade_slow": 0.5,
+      "janela_analise_segundos": 2.0,
+      "duracao_freeze": null,
+      "grafismos": [],
+      "legenda_analise": "Finta excelente. Agora é ler a posição do goleiro para buscar o espaço livre."
+    },
+    {
+      "nome": "lance_03_1x1_continuidade",
+      "atleta": "Cirilo",
+      "tipo": "acerto",
+      "label_abertura": "ACERTO: 1x1 e Continuidade",
+      "inicio": "00:11:00.000",
+      "fim": "00:11:13.000",
+      "momento_analise": "00:11:09.000",
+      "tipo_analise": "slow_motion",
+      "velocidade_slow": 0.5,
+      "janela_analise_segundos": 2.0,
+      "duracao_freeze": null,
+      "grafismos": [],
+      "legenda_analise": "Agressividade no duelo de 1x1 e passe rápido para manter o ataque em movimento."
+    },
+    {
+      "nome": "lance_05_transicao_iago",
+      "atleta": "Iago",
+      "tipo": "acerto",
+      "label_abertura": "ACERTO: Transição direta rápida",
+      "inicio": "00:11:45.000",
+      "fim": "00:12:00.000",
+      "momento_analise": "00:11:52.000",
+      "tipo_analise": "slow_motion",
+      "velocidade_slow": 0.5,
+      "janela_analise_segundos": 2.0,
+      "duracao_freeze": null,
+      "grafismos": [],
+      "legenda_analise": "Atraso na recomposição adversária. Rápida leitura para acionar Iago no espaço livre."
+    }
+  ]
+}

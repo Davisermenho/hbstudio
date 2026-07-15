@@ -1,0 +1,56 @@
+{
+  "change_id": "CHG-2026-001",
+  "evaluation_id": "EVAL-BASELINE-001",
+  "evaluated_at": "2026-07-15T15:03:32-03:00",
+  "scope": "Teste funcional de fumaça de um clipe executado após a restauração integral da baseline 0.4.0.",
+  "baseline_integrity_before_execution": "6/6 hashes passed",
+  "execution": {
+    "interpreter": ".venv/bin/python",
+    "entrypoint": "scripts/editor/editar_video.py",
+    "case_count": 1,
+    "exit_code": 0,
+    "unexpected_log_errors": 0,
+    "elapsed_seconds": 35.92,
+    "user_cpu_seconds": 104.52,
+    "system_cpu_seconds": 10.77,
+    "total_cpu_seconds": 115.29,
+    "maximum_resident_set_kib": 708696
+  },
+  "input": {
+    "source_window_seconds": 13.0,
+    "source_sha256_before": "c21c573d27dda67d73464633ae234202746b52ff1871ab99c416f645e8fdb815",
+    "source_sha256_after": "c21c573d27dda67d73464633ae234202746b52ff1871ab99c416f645e8fdb815",
+    "source_unchanged": true
+  },
+  "output": {
+    "duration_seconds": 28.0,
+    "size_bytes": 19338420,
+    "sha256": "44e0ceac9f8683cf0aff4575e2cefd684d3c2465c7f43d33383880a08fac005d",
+    "matches_pre_reconciliation_artifact_sha256": true,
+    "streams": [
+      "video:h264:1920x1080:30fps:28s",
+      "audio:aac:28s"
+    ],
+    "full_decode_exit_code": 0,
+    "audio_mean_volume_db": -23.5,
+    "audio_max_volume_db": -6.6
+  },
+  "latency": {
+    "observed_elapsed_seconds": 35.92,
+    "processing_factor_over_source_window": 2.7631,
+    "processing_factor_over_output_duration": 1.2829,
+    "percentiles": null,
+    "note": "Uma execução não permite calcular p50 ou p95."
+  },
+  "quality": {
+    "status": "human_review_approved",
+    "technical_result": "1/1 caso funcional aprovado tecnicamente; saída criada, streams presentes, duração coerente, decodificação integral sem erro e amostras de início, meio e fim sem corrupção aparente.",
+    "human_review": "approved",
+    "evidence": "changes/evidence/CHG-2026-001/audiovisual-review.json",
+    "coverage_limitation": "Um caso de fumaça aprovado não demonstra taxa geral de qualidade igual ou superior a 95%."
+  },
+  "temporary_artifacts": {
+    "directory": "/tmp/atletas-videos-eval-baseline",
+    "execution_log_sha256": "2f097c8d3141bd42af48c2c52b26a278928ac08420172c2a979f0b3ff4b466ee"
+  }
+}

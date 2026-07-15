@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.atletas-videos/schemas/change.schema.json",
+  "title": "Registro estruturado de mudança",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "change_id",
+    "date",
+    "version_from",
+    "version_to",
+    "responsible",
+    "components",
+    "reason",
+    "evidence",
+    "changes",
+    "expected_behavior",
+    "known_risks",
+    "compatibility",
+    "evaluation",
+    "approval",
+    "rollback",
+    "version_control",
+    "publication"
+  ],
+  "properties": {
+    "change_id": {"type": "string", "pattern": "^CHG-[0-9]{4}-[0-9]{3}$"},
+    "date": {"type": "string", "format": "date"},
+    "version_from": {"type": "string"},
+    "version_to": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"},
+    "responsible": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "components": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "reason": {"type": "string", "minLength": 1},
+    "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+    "changes": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "expected_behavior": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}},
+    "known_risks": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["breaking_changes", "migration_required", "notes"],
+      "properties": {
+        "breaking_changes": {"type": "array", "items": {"type": "string"}},
+        "migration_required": {"type": "boolean"},
+        "notes": {"type": "string"}
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["quality", "security", "latency", "cost", "regressions"],
+      "properties": {
+        "quality": {"$ref": "#/$defs/metric"},
+        "security": {"$ref": "#/$defs/metric"},
+        "latency": {"$ref": "#/$defs/metric"},
+        "cost": {"$ref": "#/$defs/metric"},
+        "regressions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["status", "critical_count", "items", "evidence"],
+          "properties": {
+            "status": {"enum": ["passed", "failed", "pending", "not_applicable"]},
+            "critical_count": {"type": ["integer", "null"], "minimum": 0},
+            "items": {"type": "array", "items": {"type": "string"}},
+            "evidence": {"type": ["string", "null"]}
+          }
+        }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "approved_by", "approved_at", "evidence"],
+      "properties": {
+        "status": {"enum": ["pending", "approved", "rejected"]},
+        "approved_by": {"type": ["string", "null"]},
+        "approved_at": {"type": ["string", "null"], "format": "date-time"},
+        "evidence": {"type": ["string", "null"]}
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_version", "procedure", "validation_status", "evidence"],
+      "properties": {
+        "target_version": {"type": "string"},
+        "procedure": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "validation_status": {"enum": ["not_tested", "passed", "failed", "not_applicable"]},
+        "evidence": {"type": ["string", "null"]}
+      }
+    },
+    "version_control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["commit", "tag"],
+      "properties": {
+        "commit": {"type": ["string", "null"]},
+        "tag": {"type": ["string", "null"]}
+      }
+    },
+    "publication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "published_at"],
+      "properties": {
+        "status": {"enum": ["not_released", "released", "rolled_back"]},
+        "published_at": {"type": ["string", "null"], "format": "date-time"}
+      }
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "reference", "description"],
+      "properties": {
+        "type": {"enum": ["file", "test", "metric", "execution_log", "approval", "other"]},
+        "reference": {"type": "string", "minLength": 1},
+        "description": {"type": "string", "minLength": 1}
+      }
+    },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "before", "after", "unit", "evidence"],
+      "properties": {
+        "status": {"enum": ["measured", "pending", "not_applicable"]},
+        "before": {"type": ["number", "string", "null"]},
+        "after": {"type": ["number", "string", "null"]},
+        "unit": {"type": ["string", "null"]},
+        "evidence": {"type": ["string", "null"]}
+      }
+    }
+  }
+}
+

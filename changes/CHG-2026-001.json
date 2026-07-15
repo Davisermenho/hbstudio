@@ -1,0 +1,168 @@
+{
+  "change_id": "CHG-2026-001",
+  "date": "2026-07-15",
+  "version_from": "unversioned",
+  "version_to": "0.4.0",
+  "responsible": [
+    "Davi Sermenho",
+    "Codex"
+  ],
+  "components": [
+    "source-code",
+    "cli-flow",
+    "video-rendering",
+    "tracking",
+    "configuration",
+    "dependencies",
+    "documentation",
+    "operational-policies",
+    "local-infrastructure"
+  ],
+  "reason": "Criar uma baseline rastreável do protótipo funcional antes das próximas alterações.",
+  "evidence": [
+    {
+      "type": "file",
+      "reference": "scripts/editor/editar_video.py",
+      "description": "Script principal existente na criação da baseline."
+    },
+    {
+      "type": "file",
+      "reference": "scripts/editor/inspecionar_frame.py",
+      "description": "Ferramenta auxiliar existente na criação da baseline."
+    },
+    {
+      "type": "file",
+      "reference": "docs/planejamento/projeto/ESPECIFICACAO.md",
+      "description": "Especificação funcional vigente na criação da baseline."
+    },
+    {
+      "type": "file",
+      "reference": "requirements.txt",
+      "description": "Declaração de dependências vigente na criação da baseline."
+    },
+    {
+      "type": "file",
+      "reference": "changes/baselines/0.4.0.sha256",
+      "description": "Hashes dos principais componentes importados na baseline."
+    },
+    {
+      "type": "metric",
+      "reference": "changes/evidence/CHG-2026-001/functional-evaluation.json",
+      "description": "Resultados da execução funcional, latência observada, custo local e verificações parciais de qualidade e segurança."
+    },
+    {
+      "type": "other",
+      "reference": "changes/evidence/CHG-2026-001/integrity-investigation.json",
+      "description": "Investigação da origem das divergências de integridade, com reconstrução exata do editor anterior e cópias preservadas no histórico local."
+    },
+    {
+      "type": "test",
+      "reference": "changes/evidence/CHG-2026-001/pip-audit.txt",
+      "description": "Auditoria de vulnerabilidades conhecidas das dependências declaradas em requirements.txt com pip-audit 2.10.1."
+    },
+    {
+      "type": "other",
+      "reference": "changes/evidence/CHG-2026-001/baseline-restoration.json",
+      "description": "Restauração explícita dos três arquivos alterados após a captura e confirmação de 6/6 hashes da baseline."
+    },
+    {
+      "type": "metric",
+      "reference": "changes/evidence/CHG-2026-001/baseline-functional-evaluation.json",
+      "description": "Nova avaliação funcional executada com o editor e a configuração restaurados da baseline 0.4.0."
+    },
+    {
+      "type": "test",
+      "reference": "changes/evidence/CHG-2026-001/audiovisual-review.json",
+      "description": "Revisão audiovisual humana integral da saída da baseline 0.4.0."
+    },
+    {
+      "type": "approval",
+      "reference": "changes/evidence/CHG-2026-001/release-approval.json",
+      "description": "Aprovação humana formal da publicação da baseline 0.4.0."
+    }
+  ],
+  "changes": [
+    "Importação do estado existente para a governança de versões.",
+    "Criação do formato estruturado de mudanças.",
+    "Criação da validação automática do changelog.",
+    "Proteção de vídeos reais, saídas e ambiente virtual por .gitignore."
+  ],
+  "expected_behavior": [
+    "Preservar o comportamento funcional do protótipo sem alteração do pipeline de vídeo.",
+    "Permitir validar automaticamente a completude dos próximos registros de mudança.",
+    "Impedir que uma release seja considerada válida sem aprovação, evidências, métricas e rollback testado."
+  ],
+  "known_risks": [
+    "As alterações pós-baseline foram preservadas fora do repositório e deverão ser reaplicadas e avaliadas como mudança independente após a publicação de 0.4.0.",
+    "O protótipo ainda não possui suíte automatizada para demonstrar ausência de regressões.",
+    "A qualidade audiovisual foi aprovada em um único teste de fumaça; essa cobertura não demonstra taxa geral de qualidade igual ou superior a 95%.",
+    "As dependências ainda não estão integralmente fixadas em arquivo de lock.",
+    "A origem não versionada impede reversão para uma tag anterior."
+  ],
+  "compatibility": {
+    "breaking_changes": [],
+    "migration_required": false,
+    "notes": "A baseline registra o comportamento existente e não altera o contrato da configuração."
+  },
+  "evaluation": {
+    "quality": {
+      "status": "measured",
+      "before": null,
+      "after": "1/1 caso funcional da baseline restaurada aprovado tecnicamente e em revisão audiovisual humana integral; cobertura limitada a teste de fumaça",
+      "unit": "functional_cases",
+      "evidence": "changes/evidence/CHG-2026-001/audiovisual-review.json"
+    },
+    "security": {
+      "status": "measured",
+      "before": null,
+      "after": "pip check aprovado; pip-audit 2.10.1 não encontrou vulnerabilidades conhecidas nas dependências de requirements.txt",
+      "unit": "local_checks",
+      "evidence": "changes/evidence/CHG-2026-001/functional-evaluation.json"
+    },
+    "latency": {
+      "status": "measured",
+      "before": null,
+      "after": "35.92 s observados em EVAL-BASELINE-001; fator 2.7631 sobre a janela-fonte e 1.2829 sobre os 28 s de saída; sem p50/p95",
+      "unit": "seconds_and_processing_factor",
+      "evidence": "changes/evidence/CHG-2026-001/baseline-functional-evaluation.json"
+    },
+    "cost": {
+      "status": "measured",
+      "before": null,
+      "after": "API paga R$ 0,00; CPU 115.29 s; memória máxima 708696 KiB; saída 19338420 bytes; hardware e energia não calculados",
+      "unit": "cpu_time_and_storage",
+      "evidence": "changes/evidence/CHG-2026-001/baseline-functional-evaluation.json"
+    },
+    "regressions": {
+      "status": "not_applicable",
+      "critical_count": null,
+      "items": [
+        "Não existe versão anterior controlada para comparação."
+      ],
+      "evidence": null
+    }
+  },
+  "approval": {
+    "status": "approved",
+    "approved_by": "Davi Sermenho",
+    "approved_at": "2026-07-15T16:12:00-03:00",
+    "evidence": "changes/evidence/CHG-2026-001/release-approval.json"
+  },
+  "rollback": {
+    "target_version": "unversioned",
+    "procedure": [
+      "Preservar cópia somente leitura dos arquivos e hashes inventariados antes do primeiro release.",
+      "Após a criação da primeira tag, usar essa tag como alvo mínimo de rollback para mudanças futuras."
+    ],
+    "validation_status": "not_applicable",
+    "evidence": null
+  },
+  "version_control": {
+    "commit": null,
+    "tag": null
+  },
+  "publication": {
+    "status": "not_released",
+    "published_at": null
+  }
+}

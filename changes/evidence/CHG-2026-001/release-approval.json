@@ -1,0 +1,20 @@
+{
+  "change_id": "CHG-2026-001",
+  "version": "0.4.0",
+  "approver": "Davi Sermenho",
+  "approved_at": "2026-07-15T16:12:00-03:00",
+  "scope": "Publicação da baseline técnica 0.4.0",
+  "evidence_reviewed": [
+    "changes/evidence/CHG-2026-001/baseline-restoration.json",
+    "changes/evidence/CHG-2026-001/baseline-functional-evaluation.json",
+    "changes/evidence/CHG-2026-001/integrity-investigation.json",
+    "changes/evidence/CHG-2026-001/audiovisual-review.json",
+    "changes/evidence/CHG-2026-001/pip-audit.txt"
+  ],
+  "accepted_limitations": [
+    "A avaliação funcional contém somente um caso.",
+    "p50 e p95 não foram calculados.",
+    "Custos de hardware e energia não foram calculados."
+  ],
+  "decision": "approved"
+}

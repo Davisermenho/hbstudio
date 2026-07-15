@@ -1,0 +1,28 @@
+{
+  "change_id": "CHG-2026-001",
+  "case_id": "EVAL-001",
+  "artifact": "lance_03_1x1_continuidade.mp4",
+  "artifact_sha256": "44e0ceac9f8683cf0aff4575e2cefd684d3c2465c7f43d33383880a08fac005d",
+  "reviewer": "Davi Sermenho",
+  "reviewed_at": "2026-07-15T15:55:00-03:00",
+  "review_location": "Rio de Janeiro, Brasil",
+  "review_scope": "Revisão audiovisual integral da saída da baseline 0.4.0",
+  "checks": {
+    "complete_playback": "passed",
+    "visual_integrity": "passed",
+    "audio_present": "passed",
+    "audio_video_sync": "passed_with_observation",
+    "cuts": "passed",
+    "text_legibility": "passed",
+    "unexpected_content_absent": "passed",
+    "audiovisual_continuity": "passed",
+    "configuration_compatibility": "passed"
+  },
+  "observations": [
+    "Durante a câmera lenta, o áudio também fica lento.",
+    "O comportamento foi aceito e é compatível com a configuração utilizada.",
+    "O termo 1x1 identifica a finta do handebol, não a proporção da imagem."
+  ],
+  "decision": "approved",
+  "blocking_issues": []
+}

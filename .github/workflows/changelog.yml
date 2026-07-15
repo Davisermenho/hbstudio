@@ -1,0 +1,23 @@
+name: Changelog
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    tags: ["v*"]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validar contrato do changelog
+        run: python3 scripts/validate_changelog.py
+      - name: Executar testes do changelog
+        run: python3 -m unittest discover -s tests -v
+      - name: Aplicar gates de publicação
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: python3 scripts/validate_changelog.py --release

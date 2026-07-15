@@ -1,0 +1,62 @@
+{
+  "change_id": "CHG-2026-001",
+  "investigated_at": "2026-07-15T14:50:53-03:00",
+  "decision": "restore_original_baseline",
+  "manifest_updated": false,
+  "content_restored": true,
+  "rebaseline_performed": false,
+  "repository_history": {
+    "git_commits": 0,
+    "git_index_entries": 0,
+    "recoverable_git_objects": 0,
+    "duplicate_named_files_in_repository": 0
+  },
+  "integrity_at_investigation": {
+    "status": "failed",
+    "passed_files": 3,
+    "total_files": 6,
+    "note": "Além das duas divergências investigadas originalmente, config_exemplo.json foi substituído depois da avaliação EVAL-001."
+  },
+  "findings": [
+    {
+      "reference": "scripts/editor/editar_video.py",
+      "expected_sha256": "cefa27cfbd8a9d50fd16729bb909562991da61d43e8dd09c3722bd4ec76607d0",
+      "current_sha256": "b2fc5430b29ad4b0fc1c4f35d76dfb786aea661049547d122f7ae3356c52df5f",
+      "origin": "O manifesto foi criado sobre o editor na raiz antes da reorganização. Depois da baseline, o arquivo recebeu três alterações documentadas: tratamento de FileNotFoundError/JSONDecodeError na configuração, tratamento de vídeo-fonte ausente e remoção do campo atleta das mensagens de progresso.",
+      "verification": "A reversão somente dessas três alterações em memória, sem escrever no workspace, reconstruiu exatamente o SHA-256 esperado.",
+      "reconstructed_sha256": "cefa27cfbd8a9d50fd16729bb909562991da61d43e8dd09c3722bd4ec76607d0",
+      "exact_reconstruction_match": true,
+      "evidence_sources": [
+        "docs/changelog/INVENTARIO.md, seções INC-002, INC-003 e 'O que foi resolvido nesta revisão'",
+        "Registro local do Codex de 2026-07-15T01:11:48, contendo as linhas 630-660 do editor anterior"
+      ]
+    },
+    {
+      "reference": "docs/planejamento/projeto/ESPECIFICACAO.md",
+      "expected_sha256": "a6490795235cc9976ea0238752d188bcd59d41ba76ac9961af68d2f92993c9fa",
+      "current_sha256": "c70e587f511a52a7bfa9e0d5e2a835e56f969533d701a105492303d2f14f8dcc",
+      "origin": "A especificação foi alterada depois da baseline para remover o nome do atleta do exemplo SAI-002 e para identificar a cerca de código como text.",
+      "verification": "A cópia preservada no histórico local do VS Code possui o SHA-256 esperado. O diff contra o arquivo atual contém 2 inserções e 2 remoções, restritas ao exemplo SAI-002.",
+      "preserved_copy_sha256": "a6490795235cc9976ea0238752d188bcd59d41ba76ac9961af68d2f92993c9fa",
+      "exact_preserved_copy_match": true,
+      "evidence_sources": [
+        "Histórico local do VS Code, entrada ODuF.md de 2026-07-15T04:49:41-03:00",
+        "docs/changelog/INVENTARIO.md, seção INC-002"
+      ]
+    },
+    {
+      "reference": "config_exemplo.json",
+      "expected_sha256": "dd6b93ac4118cb8792f5350d7e41f68f1c40d309e303af6508e75850719e379a",
+      "current_sha256": "bee1242a1506c01b98eb55da140e7c4ea9294fa26437c28ed71dffa7ac197013",
+      "origin": "O arquivo foi substituído depois da avaliação EVAL-001 por uma configuração de outro vídeo e com nove clipes.",
+      "verification": "O arquivo conferia durante EVAL-001. A cópia jixo.json do histórico local do VS Code possui o SHA-256 esperado; o arquivo atual nasceu em 2026-07-15T07:26:44-03:00.",
+      "preserved_copy_sha256": "dd6b93ac4118cb8792f5350d7e41f68f1c40d309e303af6508e75850719e379a",
+      "exact_preserved_copy_match": true,
+      "evidence_sources": [
+        "Histórico local do VS Code, entrada jixo.json de 2026-07-14T21:43:04-03:00",
+        "changes/evidence/CHG-2026-001/functional-evaluation.json"
+      ]
+    }
+  ],
+  "conclusion": "Os hashes esperados correspondem a versões anteriores reais. As divergências decorreram de alterações posteriores à criação do manifesto, não de erro do algoritmo de hash. A decisão foi restaurar a baseline original; o resultado da restauração está em baseline-restoration.json."
+}
