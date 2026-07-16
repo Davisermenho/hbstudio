@@ -1,0 +1,120 @@
+{
+  "change_id": "CHG-2026-006",
+  "date": "2026-07-15",
+  "version_from": "0.4.4",
+  "version_to": "0.4.5",
+  "responsible": [
+    "Davi Sermenho",
+    "Codex"
+  ],
+  "components": [
+    "engineering-documentation",
+    "notion-source-validation"
+  ],
+  "reason": "Aplicar isoladamente PATCH-ENG-004 para corrigir a divisão de responsabilidades documentais em ENGENHARIA.md.",
+  "evidence": [
+    {
+      "type": "approval",
+      "reference": "changes/evidence/CHG-2026-006/request-approval.json",
+      "description": "Autorização explícita para aplicar PATCH-ENG-004 e analisar seu impacto."
+    },
+    {
+      "type": "file",
+      "reference": "changes/evidence/CHG-2026-006/notion-source-validation.json",
+      "description": "Releitura das páginas canônicas que sustentam a matriz de responsabilidades."
+    },
+    {
+      "type": "file",
+      "reference": "changes/evidence/CHG-2026-006/patch-impact.json",
+      "description": "Comparação do estado anterior e posterior ao patch."
+    },
+    {
+      "type": "file",
+      "reference": "changes/evidence/CHG-2026-006/rollback-validation.json",
+      "description": "Validação isolada do retorno à versão 0.4.4."
+    }
+  ],
+  "changes": [
+    "Explicitação das responsabilidades de CONTEXT.md e AGENT_POLICY.md.",
+    "Definição do escopo proposto de ENGINEERING_CONTEXT.md sem duplicar políticas.",
+    "Preservação de FERRAMENTAS_TECNICAS como documento especializado em vídeo.",
+    "Preservação da documentação interna como autoridade dos detalhes de cada repositório."
+  ],
+  "expected_behavior": [
+    "Permitir que leitores e agentes identifiquem uma única responsabilidade principal para cada documento.",
+    "Evitar que o documento proposto duplique políticas ou detalhes internos de repositórios."
+  ],
+  "known_risks": [
+    "Os erros estruturais e de lint não abrangidos por PATCH-ENG-004 permanecem no documento.",
+    "A matriz deverá ser relida se as páginas do Notion forem atualizadas."
+  ],
+  "compatibility": {
+    "breaking_changes": [],
+    "migration_required": false,
+    "notes": "Alteração editorial local; nenhuma página do Notion ou comportamento do editor de vídeo foi modificado."
+  },
+  "evaluation": {
+    "quality": {
+      "status": "measured",
+      "before": "Responsabilidades documentais genéricas e incompletas",
+      "after": "Responsabilidades explícitas e não sobrepostas para cinco classes documentais",
+      "unit": "document_responsibility_mapping",
+      "evidence": "changes/evidence/CHG-2026-006/patch-impact.json"
+    },
+    "security": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Nenhum dado sensível ou segredo foi adicionado.",
+      "unit": null,
+      "evidence": null
+    },
+    "latency": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Mudança exclusivamente documental.",
+      "unit": null,
+      "evidence": null
+    },
+    "cost": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Sem consumo operacional adicional.",
+      "unit": null,
+      "evidence": null
+    },
+    "regressions": {
+      "status": "passed",
+      "critical_count": 0,
+      "items": [
+        "O título e o resumo validados anteriormente foram preservados.",
+        "Nenhuma página do Notion foi alterada."
+      ],
+      "evidence": "changes/evidence/CHG-2026-006/patch-impact.json"
+    }
+  },
+  "approval": {
+    "status": "approved",
+    "approved_by": "Davi Sermenho",
+    "approved_at": "2026-07-15T22:32:52-03:00",
+    "evidence": "changes/evidence/CHG-2026-006/request-approval.json"
+  },
+  "rollback": {
+    "target_version": "0.4.4",
+    "procedure": [
+      "Restaurar somente a lista anterior sob Ele não deve substituir.",
+      "Remover o registro e as evidências de CHG-2026-006.",
+      "Restaurar VERSION para 0.4.4 e remover a entrada 0.4.5 do changelog.",
+      "Executar novamente o validador do changelog."
+    ],
+    "validation_status": "passed",
+    "evidence": "changes/evidence/CHG-2026-006/rollback-validation.json"
+  },
+  "version_control": {
+    "commit": null,
+    "tag": null
+  },
+  "publication": {
+    "status": "not_released",
+    "published_at": null
+  }
+}

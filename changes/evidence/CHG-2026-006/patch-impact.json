@@ -1,0 +1,43 @@
+{
+  "change_id": "CHG-2026-006",
+  "patch_id": "PATCH-ENG-004",
+  "target": "ENGENHARIA.md",
+  "before": {
+    "sha256": "e52af2f5dca930c0cc65c2ca65bfde0fc68221e164a8d8ed837bd98ad71907c6",
+    "lines": 530,
+    "words": 1561,
+    "bytes": 12460,
+    "markdownlint_errors": 11
+  },
+  "after": {
+    "sha256": "c2a424404a865893a71a12dee89b43e401f168920cf3531707379eb60b2e905c",
+    "lines": 536,
+    "words": 1595,
+    "bytes": 12785,
+    "markdownlint_errors": 11
+  },
+  "delta": {
+    "lines": 6,
+    "words": 34,
+    "bytes": 325,
+    "markdownlint_errors": 0
+  },
+  "acceptance": {
+    "context_responsibility_explicit": true,
+    "agent_policy_responsibility_explicit": true,
+    "video_tools_remain_specialized": true,
+    "proposed_document_does_not_duplicate_policies": true,
+    "repository_documentation_remains_project_specific": true,
+    "title_and_summary_preserved": true,
+    "notion_pages_modified": false
+  },
+  "formatting": {
+    "temporary_list_marker": "*",
+    "reason": "Preservar o estilo atual e evitar regressão de MD004 antes de PATCH-ENG-006.",
+    "maximum_line_length_in_changed_matrix": 77
+  },
+  "remaining_findings": {
+    "markdownlint_errors": 11,
+    "details": "Dez ocorrências de MD013 e uma de MD012 permanecem fora do escopo de PATCH-ENG-004."
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "change_id": "CHG-2026-005",
+  "patch_id": "PATCH-ENG-003",
+  "target": "ENGENHARIA.md",
+  "before": {
+    "sha256": "f31996779a1b8fd64ca78c44209ba843cecd553a45aa8c7ed299b924fbd847b9",
+    "lines": 521,
+    "words": 1511,
+    "bytes": 12053,
+    "markdownlint_errors": 11
+  },
+  "after": {
+    "sha256": "e52af2f5dca930c0cc65c2ca65bfde0fc68221e164a8d8ed837bd98ad71907c6",
+    "lines": 530,
+    "words": 1561,
+    "bytes": 12460,
+    "markdownlint_errors": 11
+  },
+  "delta": {
+    "lines": 9,
+    "words": 50,
+    "bytes": 407,
+    "markdownlint_errors": 0
+  },
+  "acceptance": {
+    "summary_immediately_after_title": true,
+    "three_canonical_notion_pages_identified": true,
+    "agent_policy_overlap_declared": true,
+    "pending_decision_not_presented_as_approved": true,
+    "summary_understandable_in_isolation": true,
+    "notion_pages_modified": false
+  },
+  "regression_detected_and_mitigated": {
+    "initial_observation": "Marcadores com hífen elevaram o markdownlint de 11 para 22 erros por inconsistência com listas preexistentes.",
+    "mitigation": "O resumo adotou temporariamente asteriscos, preservando o padrão atual; a conversão global para hífens permanece em PATCH-ENG-006.",
+    "final_result": "O documento voltou a 11 erros, sem regressão líquida de lint."
+  },
+  "remaining_findings": {
+    "markdownlint_errors": 11,
+    "details": "Dez ocorrências de MD013 e uma de MD012 permanecem fora do escopo de PATCH-ENG-003."
+  }
+}

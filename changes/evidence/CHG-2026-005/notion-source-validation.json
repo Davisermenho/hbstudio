@@ -1,0 +1,29 @@
+{
+  "change_id": "CHG-2026-005",
+  "validated_at": "2026-07-15T22:25:20-03:00",
+  "mode": "read_only",
+  "sources": [
+    {
+      "title": "CONTEXT.md",
+      "id": "39cf2ae0-6fc8-8051-bb8f-ee62048b5551",
+      "url": "https://app.notion.com/p/39cf2ae06fc88051bb8fee62048b5551",
+      "source_snapshot": "2026-07-15T17:00:58.766Z",
+      "validated_claim": "Contém identidade, autoridade, escopo e rotas para documentos especializados."
+    },
+    {
+      "title": "AGENT_POLICY.md",
+      "id": "39cf2ae0-6fc8-80a3-9fc1-cb1e32dfb08e",
+      "url": "https://app.notion.com/p/39cf2ae06fc880a39fc1cb1e32dfb08e",
+      "source_snapshot": "2026-07-15T13:12:52.809Z",
+      "validated_claim": "Contém políticas, análise de capacidade operacional e separação entre execução, verificação, aceitação e conclusão."
+    },
+    {
+      "title": "FERRAMENTAS_TECNICAS",
+      "id": "39df2ae0-6fc8-8090-b281-e57896fbe8a2",
+      "url": "https://app.notion.com/p/39df2ae06fc88090b281e57896fbe8a2",
+      "source_snapshot": "2026-07-14T23:49:34.615Z",
+      "validated_claim": "É uma página existente e especializada em ferramentas de edição de vídeo."
+    }
+  ],
+  "notion_pages_modified": false
+}

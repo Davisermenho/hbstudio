@@ -1,0 +1,109 @@
+{
+  "change_id": "CHG-2026-004",
+  "date": "2026-07-15",
+  "version_from": "0.4.2",
+  "version_to": "0.4.3",
+  "responsible": [
+    "Davi Sermenho",
+    "Codex"
+  ],
+  "components": [
+    "engineering-documentation"
+  ],
+  "reason": "Aplicar isoladamente PATCH-ENG-002 para identificar ENGENHARIA.md como proposta, sem executar as demais ações do plano.",
+  "evidence": [
+    {
+      "type": "approval",
+      "reference": "changes/evidence/CHG-2026-004/request-approval.json",
+      "description": "Autorização explícita para aplicar PATCH-ENG-002 e analisar seu impacto."
+    },
+    {
+      "type": "file",
+      "reference": "changes/evidence/CHG-2026-004/patch-impact.json",
+      "description": "Comparação verificável do estado anterior e posterior ao patch."
+    },
+    {
+      "type": "file",
+      "reference": "changes/evidence/CHG-2026-004/rollback-validation.json",
+      "description": "Validação isolada do retorno à versão 0.4.2."
+    }
+  ],
+  "changes": [
+    "Substituição do H1 de ENGENHARIA.md por um título que identifica o conteúdo como proposta."
+  ],
+  "expected_behavior": [
+    "Impedir que leitores e agentes interpretem ENGENHARIA.md como a página canônica ENGINEERING_CONTEXT.md já criada.",
+    "Preservar todo o conteúdo além do título e manter as demais ações do plano pendentes."
+  ],
+  "known_risks": [
+    "Os erros estruturais e de lint não abrangidos por PATCH-ENG-002 permanecem no documento."
+  ],
+  "compatibility": {
+    "breaking_changes": [],
+    "migration_required": false,
+    "notes": "Alteração editorial de uma linha, sem mudança em páginas do Notion ou no editor de vídeo."
+  },
+  "evaluation": {
+    "quality": {
+      "status": "measured",
+      "before": "Título apresentava o arquivo como ENGINEERING_CONTEXT.md canônico",
+      "after": "Título identifica explicitamente o arquivo como proposta de criação",
+      "unit": "document_identity",
+      "evidence": "changes/evidence/CHG-2026-004/patch-impact.json"
+    },
+    "security": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Nenhum dado sensível, segredo ou comportamento executável foi alterado.",
+      "unit": null,
+      "evidence": null
+    },
+    "latency": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Mudança exclusivamente documental.",
+      "unit": null,
+      "evidence": null
+    },
+    "cost": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Sem consumo operacional adicional.",
+      "unit": null,
+      "evidence": null
+    },
+    "regressions": {
+      "status": "passed",
+      "critical_count": 0,
+      "items": [
+        "Somente o título planejado foi alterado em ENGENHARIA.md."
+      ],
+      "evidence": "changes/evidence/CHG-2026-004/patch-impact.json"
+    }
+  },
+  "approval": {
+    "status": "approved",
+    "approved_by": "Davi Sermenho",
+    "approved_at": "2026-07-15T22:19:16-03:00",
+    "evidence": "changes/evidence/CHG-2026-004/request-approval.json"
+  },
+  "rollback": {
+    "target_version": "0.4.2",
+    "procedure": [
+      "Restaurar o título de ENGENHARIA.md para # ENGINEERING_CONTEXT.md.",
+      "Remover o registro e as evidências de CHG-2026-004.",
+      "Restaurar VERSION para 0.4.2 e remover a entrada 0.4.3 do changelog.",
+      "Executar novamente o validador do changelog."
+    ],
+    "validation_status": "passed",
+    "evidence": "changes/evidence/CHG-2026-004/rollback-validation.json"
+  },
+  "version_control": {
+    "commit": null,
+    "tag": null
+  },
+  "publication": {
+    "status": "not_released",
+    "published_at": null
+  }
+}

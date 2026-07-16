@@ -1,0 +1,15 @@
+{
+  "change_id": "CHG-2026-003",
+  "approved_by": "Davi Sermenho",
+  "approved_at": "2026-07-15T22:09:07-03:00",
+  "approval_source": "Solicitação explícita do usuário na conversa ativa",
+  "approved_scope": [
+    "Criar patch-diff.md com o plano completo de implementação da revisão corrigida de ENGENHARIA.md.",
+    "Incluir critérios de aceitação individuais, verificação e validação final."
+  ],
+  "not_authorized": [
+    "Implementar as alterações planejadas em ENGENHARIA.md.",
+    "Criar ou alterar páginas no Notion.",
+    "Publicar release, commit ou tag."
+  ]
+}

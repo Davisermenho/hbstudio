@@ -1,0 +1,119 @@
+{
+  "change_id": "CHG-2026-005",
+  "date": "2026-07-15",
+  "version_from": "0.4.3",
+  "version_to": "0.4.4",
+  "responsible": [
+    "Davi Sermenho",
+    "Codex"
+  ],
+  "components": [
+    "engineering-documentation",
+    "notion-source-validation"
+  ],
+  "reason": "Aplicar isoladamente PATCH-ENG-003 para adicionar um resumo executivo factual e verificável após o título de ENGENHARIA.md.",
+  "evidence": [
+    {
+      "type": "approval",
+      "reference": "changes/evidence/CHG-2026-005/request-approval.json",
+      "description": "Autorização explícita para aplicar PATCH-ENG-003 e analisar seu impacto."
+    },
+    {
+      "type": "file",
+      "reference": "changes/evidence/CHG-2026-005/notion-source-validation.json",
+      "description": "Releitura das três páginas canônicas que sustentam o resumo."
+    },
+    {
+      "type": "file",
+      "reference": "changes/evidence/CHG-2026-005/patch-impact.json",
+      "description": "Comparação do estado anterior e posterior ao patch."
+    },
+    {
+      "type": "file",
+      "reference": "changes/evidence/CHG-2026-005/rollback-validation.json",
+      "description": "Validação isolada do retorno à versão 0.4.3."
+    }
+  ],
+  "changes": [
+    "Inserção de resumo executivo imediatamente após o título de ENGENHARIA.md.",
+    "Identificação das funções de CONTEXT.md, AGENT_POLICY.md e FERRAMENTAS_TECNICAS.",
+    "Registro explícito da lacuna técnica e da decisão ainda pendente."
+  ],
+  "expected_behavior": [
+    "Permitir que leitores e agentes compreendam isoladamente o estado, as fontes, a lacuna e a decisão pendente.",
+    "Preservar o conteúdo anterior e não representar a página proposta como criada ou aprovada."
+  ],
+  "known_risks": [
+    "Os erros estruturais e de lint não abrangidos por PATCH-ENG-003 permanecem no documento.",
+    "As fontes do Notion devem ser relidas novamente se forem atualizadas antes da consolidação final."
+  ],
+  "compatibility": {
+    "breaking_changes": [],
+    "migration_required": false,
+    "notes": "Alteração editorial local; nenhuma página do Notion ou comportamento do editor de vídeo foi modificado."
+  },
+  "evaluation": {
+    "quality": {
+      "status": "measured",
+      "before": "Informações críticas dispersas entre o início e o final do documento",
+      "after": "Resumo autossuficiente imediatamente após o título",
+      "unit": "executive_summary",
+      "evidence": "changes/evidence/CHG-2026-005/patch-impact.json"
+    },
+    "security": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Nenhum dado sensível ou segredo foi adicionado.",
+      "unit": null,
+      "evidence": null
+    },
+    "latency": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Mudança exclusivamente documental.",
+      "unit": null,
+      "evidence": null
+    },
+    "cost": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Sem consumo operacional adicional.",
+      "unit": null,
+      "evidence": null
+    },
+    "regressions": {
+      "status": "passed",
+      "critical_count": 0,
+      "items": [
+        "O título validado por PATCH-ENG-002 foi preservado.",
+        "Nenhuma página do Notion foi alterada."
+      ],
+      "evidence": "changes/evidence/CHG-2026-005/patch-impact.json"
+    }
+  },
+  "approval": {
+    "status": "approved",
+    "approved_by": "Davi Sermenho",
+    "approved_at": "2026-07-15T22:25:20-03:00",
+    "evidence": "changes/evidence/CHG-2026-005/request-approval.json"
+  },
+  "rollback": {
+    "target_version": "0.4.3",
+    "procedure": [
+      "Remover somente a seção Resumo executivo inserida após o título.",
+      "Remover o registro e as evidências de CHG-2026-005.",
+      "Restaurar VERSION para 0.4.3 e remover a entrada 0.4.4 do changelog.",
+      "Executar novamente o validador do changelog."
+    ],
+    "validation_status": "passed",
+    "evidence": "changes/evidence/CHG-2026-005/rollback-validation.json"
+  },
+  "version_control": {
+    "commit": null,
+    "tag": null
+  },
+  "publication": {
+    "status": "not_released",
+    "published_at": null
+  }
+}

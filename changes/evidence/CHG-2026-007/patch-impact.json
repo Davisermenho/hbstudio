@@ -1,0 +1,46 @@
+{
+  "change_id": "CHG-2026-007",
+  "patch_id": "PATCH-ENG-005",
+  "target": "ENGENHARIA.md",
+  "before": {
+    "sha256": "c2a424404a865893a71a12dee89b43e401f168920cf3531707379eb60b2e905c",
+    "lines": 536,
+    "words": 1595,
+    "bytes": 12785,
+    "markdownlint_errors": 11,
+    "actions_as_h3": 13,
+    "actions_as_h4": 1,
+    "actions_as_plain_text": 4
+  },
+  "after": {
+    "sha256": "4496a1c83b17fd5898f6cbdd45b260aaf77afcef476e426c82a1e6cb72ce983c",
+    "lines": 546,
+    "words": 1601,
+    "bytes": 12815,
+    "markdownlint_errors": 11,
+    "h1": 1,
+    "h2": 5,
+    "h3": 18,
+    "actions_as_h3": 18
+  },
+  "delta": {
+    "lines": 10,
+    "words": 6,
+    "bytes": 30,
+    "markdownlint_errors": 0
+  },
+  "acceptance": {
+    "no_unjustified_heading_level_jump": true,
+    "actions_1_to_18_use_h3": true,
+    "no_numbered_titles_as_plain_text": true,
+    "action_11_has_no_duplicate_space": true,
+    "heading_tree_represents_document_structure": true,
+    "new_headings_have_blank_lines_before_and_after": true,
+    "previous_title_summary_and_responsibility_matrix_preserved": true,
+    "notion_pages_modified": false
+  },
+  "remaining_findings": {
+    "markdownlint_errors": 11,
+    "details": "Dez ocorrências de MD013 e uma de MD012 permanecem fora do escopo de PATCH-ENG-005."
+  }
+}

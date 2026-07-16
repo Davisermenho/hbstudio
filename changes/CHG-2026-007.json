@@ -1,0 +1,115 @@
+{
+  "change_id": "CHG-2026-007",
+  "date": "2026-07-15",
+  "version_from": "0.4.5",
+  "version_to": "0.4.6",
+  "responsible": [
+    "Davi Sermenho",
+    "Codex"
+  ],
+  "components": [
+    "engineering-documentation",
+    "markdown-structure"
+  ],
+  "reason": "Aplicar isoladamente PATCH-ENG-005 para corrigir a hierarquia de cabeçalhos de ENGENHARIA.md.",
+  "evidence": [
+    {
+      "type": "approval",
+      "reference": "changes/evidence/CHG-2026-007/request-approval.json",
+      "description": "Autorização explícita para aplicar PATCH-ENG-005 e analisar seu impacto."
+    },
+    {
+      "type": "file",
+      "reference": "changes/evidence/CHG-2026-007/patch-impact.json",
+      "description": "Comparação estrutural do estado anterior e posterior ao patch."
+    },
+    {
+      "type": "file",
+      "reference": "changes/evidence/CHG-2026-007/rollback-validation.json",
+      "description": "Validação isolada do retorno à versão 0.4.5."
+    }
+  ],
+  "changes": [
+    "Conversão de falsos títulos em cabeçalhos Markdown.",
+    "Uniformização das ações 1 a 18 no nível três.",
+    "Promoção de Documento proposto, Ordem recomendada de execução e Estado atual ao nível dois.",
+    "Remoção do espaço duplicado no título da ação 11.",
+    "Inserção de linhas em branco obrigatórias ao redor dos novos cabeçalhos."
+  ],
+  "expected_behavior": [
+    "Produzir uma árvore de seções contínua com um H1, seções H2 e dezoito ações H3.",
+    "Permitir navegação e extração semântica das ações sem alterar seu conteúdo."
+  ],
+  "known_risks": [
+    "Os erros de comprimento de linha e linhas em branco não abrangidos por PATCH-ENG-005 permanecem no documento."
+  ],
+  "compatibility": {
+    "breaking_changes": [],
+    "migration_required": false,
+    "notes": "Alteração estrutural de Markdown; conteúdo factual e páginas do Notion não foram modificados."
+  },
+  "evaluation": {
+    "quality": {
+      "status": "measured",
+      "before": "Treze ações detectáveis como H3, uma ação em H4 e quatro ações como texto comum",
+      "after": "Dezoito ações detectáveis e sequenciais como H3",
+      "unit": "markdown_heading_tree",
+      "evidence": "changes/evidence/CHG-2026-007/patch-impact.json"
+    },
+    "security": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Nenhum dado sensível ou segredo foi adicionado.",
+      "unit": null,
+      "evidence": null
+    },
+    "latency": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Mudança exclusivamente documental.",
+      "unit": null,
+      "evidence": null
+    },
+    "cost": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Sem consumo operacional adicional.",
+      "unit": null,
+      "evidence": null
+    },
+    "regressions": {
+      "status": "passed",
+      "critical_count": 0,
+      "items": [
+        "Título, resumo e matriz de responsabilidades foram preservados.",
+        "Nenhum conteúdo factual foi removido."
+      ],
+      "evidence": "changes/evidence/CHG-2026-007/patch-impact.json"
+    }
+  },
+  "approval": {
+    "status": "approved",
+    "approved_by": "Davi Sermenho",
+    "approved_at": "2026-07-15T22:47:47-03:00",
+    "evidence": "changes/evidence/CHG-2026-007/request-approval.json"
+  },
+  "rollback": {
+    "target_version": "0.4.5",
+    "procedure": [
+      "Restaurar os nove títulos e espaçamentos anteriores em ENGENHARIA.md.",
+      "Remover o registro e as evidências de CHG-2026-007.",
+      "Restaurar VERSION para 0.4.5 e remover a entrada 0.4.6 do changelog.",
+      "Executar novamente o validador do changelog."
+    ],
+    "validation_status": "passed",
+    "evidence": "changes/evidence/CHG-2026-007/rollback-validation.json"
+  },
+  "version_control": {
+    "commit": null,
+    "tag": null
+  },
+  "publication": {
+    "status": "not_released",
+    "published_at": null
+  }
+}

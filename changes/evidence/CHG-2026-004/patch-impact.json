@@ -1,0 +1,38 @@
+{
+  "change_id": "CHG-2026-004",
+  "patch_id": "PATCH-ENG-002",
+  "target": "ENGENHARIA.md",
+  "before": {
+    "sha256": "6d0bb9cb19a67a0b1fae2de490a5ff860d6bf12b8364e04b9d1449d06988766a",
+    "lines": 521,
+    "words": 1507,
+    "bytes": 12026,
+    "title": "# ENGINEERING_CONTEXT.md",
+    "markdownlint_errors": 11
+  },
+  "after": {
+    "sha256": "f31996779a1b8fd64ca78c44209ba843cecd553a45aa8c7ed299b924fbd847b9",
+    "lines": 521,
+    "words": 1511,
+    "bytes": 12053,
+    "title": "# Proposta de criação do `ENGINEERING_CONTEXT.md`",
+    "markdownlint_errors": 11
+  },
+  "delta": {
+    "lines": 0,
+    "words": 4,
+    "bytes": 27,
+    "markdownlint_errors": 0
+  },
+  "acceptance": {
+    "exactly_one_h1_outside_code_fences": true,
+    "title_contains_proposta": true,
+    "proposed_document_not_presented_as_existing_page": true,
+    "notion_pages_modified": false,
+    "remaining_content_intentionally_unchanged": true
+  },
+  "remaining_findings": {
+    "markdownlint_errors": 11,
+    "details": "Dez ocorrências de MD013 e uma de MD012 permanecem fora do escopo de PATCH-ENG-002."
+  }
+}

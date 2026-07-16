@@ -1,0 +1,15 @@
+{
+  "change_id": "CHG-2026-004",
+  "target_version": "0.4.2",
+  "status": "passed",
+  "method": "Reversão sequencial em cópia mínima e isolada do repositório.",
+  "checks": [
+    "título anterior de ENGENHARIA.md restaurado",
+    "mudanças posteriores removidas",
+    "VERSION restaurado para 0.4.2",
+    "validador do changelog aprovado",
+    "hash anterior recuperado"
+  ],
+  "engineering_sha256": "6d0bb9cb19a67a0b1fae2de490a5ff860d6bf12b8364e04b9d1449d06988766a",
+  "validator_output": "Changelog válido."
+}

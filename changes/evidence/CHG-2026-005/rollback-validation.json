@@ -1,0 +1,15 @@
+{
+  "change_id": "CHG-2026-005",
+  "target_version": "0.4.3",
+  "status": "passed",
+  "method": "Reversão sequencial em cópia mínima e isolada do repositório.",
+  "checks": [
+    "resumo executivo removido",
+    "mudanças posteriores removidas",
+    "VERSION restaurado para 0.4.3",
+    "validador do changelog aprovado",
+    "hash anterior recuperado"
+  ],
+  "engineering_sha256": "f31996779a1b8fd64ca78c44209ba843cecd553a45aa8c7ed299b924fbd847b9",
+  "validator_output": "Changelog válido."
+}

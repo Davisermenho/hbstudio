@@ -1,0 +1,15 @@
+{
+  "change_id": "CHG-2026-004",
+  "approved_by": "Davi Sermenho",
+  "approved_at": "2026-07-15T22:19:16-03:00",
+  "approval_source": "Solicitação explícita do usuário na conversa ativa",
+  "approved_scope": [
+    "Aplicar PATCH-ENG-002 em ENGENHARIA.md.",
+    "Analisar o impacto gerado pela alteração."
+  ],
+  "not_authorized": [
+    "Executar PATCH-ENG-003 ou ações posteriores.",
+    "Criar ou alterar páginas no Notion.",
+    "Publicar release, commit ou tag."
+  ]
+}

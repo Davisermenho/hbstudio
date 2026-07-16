@@ -1,0 +1,116 @@
+{
+  "change_id": "CHG-2026-003",
+  "date": "2026-07-15",
+  "version_from": "0.4.1",
+  "version_to": "0.4.2",
+  "responsible": [
+    "Davi Sermenho",
+    "Codex"
+  ],
+  "components": [
+    "engineering-documentation",
+    "implementation-plan",
+    "validation-governance"
+  ],
+  "reason": "Registrar um plano patch/diff completo e verificável para implementar a revisão corrigida de ENGENHARIA.md com fontes canônicas no Notion.",
+  "evidence": [
+    {
+      "type": "file",
+      "reference": "patch-diff.md",
+      "description": "Plano de implementação com ações, critérios de aceitação, verificações, validações e gate final."
+    },
+    {
+      "type": "approval",
+      "reference": "changes/evidence/CHG-2026-003/request-approval.json",
+      "description": "Registro do escopo autorizado pela solicitação explícita do usuário."
+    },
+    {
+      "type": "file",
+      "reference": "changes/evidence/CHG-2026-003/rollback-validation.json",
+      "description": "Validação isolada do retorno à versão 0.4.1."
+    }
+  ],
+  "changes": [
+    "Criação de patch-diff.md como plano executável da revisão corrigida de ENGENHARIA.md.",
+    "Definição de critérios individuais de aceitação para dezoito ações.",
+    "Definição de matriz de evidências e gate de validação final.",
+    "Registro da precedência das páginas canônicas do Notion sobre referências locais."
+  ],
+  "expected_behavior": [
+    "Permitir implementar a revisão sem confundir proposta, política e inventário factual.",
+    "Impedir que ações sejam marcadas como concluídas sem verificação e validação.",
+    "Preservar a rastreabilidade entre cada mudança, seu critério de aceitação e sua evidência."
+  ],
+  "known_risks": [
+    "O plano depende de acesso futuro às páginas canônicas do Notion para revalidação factual.",
+    "A implementação em ENGENHARIA.md ainda não foi executada nem aprovada por este registro."
+  ],
+  "compatibility": {
+    "breaking_changes": [],
+    "migration_required": false,
+    "notes": "A mudança adiciona documentação de planejamento e não altera o editor de vídeo, configurações ou páginas do Notion."
+  },
+  "evaluation": {
+    "quality": {
+      "status": "measured",
+      "before": "Revisão em prosa sem plano canônico de execução",
+      "after": "18 ações com critérios individuais, verificação, validação e bloqueios",
+      "unit": "documented_actions",
+      "evidence": "patch-diff.md"
+    },
+    "security": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Nenhuma credencial, dependência ou superfície de execução foi adicionada.",
+      "unit": null,
+      "evidence": null
+    },
+    "latency": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Mudança exclusivamente documental.",
+      "unit": null,
+      "evidence": null
+    },
+    "cost": {
+      "status": "not_applicable",
+      "before": null,
+      "after": "Sem alteração de consumo operacional ou serviços externos.",
+      "unit": null,
+      "evidence": null
+    },
+    "regressions": {
+      "status": "passed",
+      "critical_count": 0,
+      "items": [
+        "ENGENHARIA.md e páginas do Notion não foram alterados pela criação do plano."
+      ],
+      "evidence": "git diff -- ENGENHARIA.md"
+    }
+  },
+  "approval": {
+    "status": "approved",
+    "approved_by": "Davi Sermenho",
+    "approved_at": "2026-07-15T22:09:07-03:00",
+    "evidence": "changes/evidence/CHG-2026-003/request-approval.json"
+  },
+  "rollback": {
+    "target_version": "0.4.1",
+    "procedure": [
+      "Remover patch-diff.md e o registro CHG-2026-003.json.",
+      "Restaurar VERSION para 0.4.1.",
+      "Remover a entrada 0.4.2 de CHANGELOG.md.",
+      "Executar novamente o validador do changelog."
+    ],
+    "validation_status": "passed",
+    "evidence": "changes/evidence/CHG-2026-003/rollback-validation.json"
+  },
+  "version_control": {
+    "commit": null,
+    "tag": null
+  },
+  "publication": {
+    "status": "not_released",
+    "published_at": null
+  }
+}
